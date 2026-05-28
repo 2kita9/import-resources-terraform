@@ -1,6 +1,6 @@
 resource "aws_iam_policy" "iam_policy" {
   name        = var.policy_name
-  description = "Imported IAM policy"
+  description = "Custom role with limited permissions"
 
   policy = jsonencode({
     Version = "2012-10-17"
@@ -10,16 +10,12 @@ resource "aws_iam_policy" "iam_policy" {
         Effect = "Allow"
 
         Action = [
-          "s3:PutObject",
-          "s3:DeleteObject"
+          "ec2:*",
+          "s3:*"
         ]
 
         Resource = "*"
       }
     ]
   })
-
-  tags = {
-    Project = var.project_id
-  }
 }
